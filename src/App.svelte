@@ -17,12 +17,14 @@
             <span class="bar bar-1" />
             <span class="bar bar-2" />
             <span class="bar bar-3" />
-            <span class="bar bar-4" />
+            <span class="bar bar-3" />
         </div>
 
         <ul>
             <li>must be at least 6 characters</li>
             <li>must contain a capital letter</li>
+            <li>must contain a number</li>
+            <li>must not be forgotten by u</li>
         </ul>
     </form>
 </main>
@@ -30,7 +32,7 @@
 <style>
     form {
         --text-color: #afafaf;
-        padding: 3px 300px;
+        padding: 10px 300px;
     }
     .field {
         width: 100%;
@@ -96,5 +98,18 @@
     .input:not(:placeholder-shown) + .label {
         transform: scale(0.8) translateY(-5rem);
         opacity: 1;
+    }
+
+    .strength {
+        display: flex;
+        height: 20px;
+        width: 100%;
+    }
+    .bar {
+        margin-right: 5px;
+        height: 100%;
+        width: 25%;
+        transition: box-shadow 500px;
+        box-shadow: inset 0px 20px #1f1f1f;
     }
 </style>
