@@ -3,6 +3,7 @@
 
     let strength = 0;
     let validation = [];
+    let showPassword = false;
 
     function validatePassword(event) {
         const password = event.target.value;
@@ -20,41 +21,54 @@
 
 <main>
     <form>
-        <div class="field">
-            <input type="email" name="email" class="input" placeholder=" " />
-            <label for="email" class="label">Email</label>
-        </div>
+        <span>
+            <div class="field">
+                <input
+                    type="email"
+                    name="email"
+                    class="input"
+                    placeholder=" "
+                />
+                <label for="email" class="label">Email</label>
+            </div>
 
-        <div class="field">
-            <input
-                type="password"
-                name="email"
-                class="input"
-                placeholder=" "
-                on:input={validatePassword}
-            />
-            <label for="password" class="label">Password</label>
-        </div>
+            <div class="field">
+                <input
+                    type={showPassword ? "text" : "password"}
+                    name="email"
+                    class="input"
+                    placeholder=" "
+                    on:input={validatePassword}
+                />
+                <label for="password" class="label">Password</label>
+            </div>
+            <span
+                class="toggle-password"
+                on:mouseenter={() => (showPassword = true)}
+                on:mouseleave={() => (showPassword = false)}
+            >
+                {showPassword ? "🐵" : "🙈"} ⬅️ Hover me to show passoword
+            </span>
+            <div class="strength">
+                <span class="bar bar-1" class:bar-show={strength > 0} />
+                <span class="bar bar-2" class:bar-show={strength > 1} />
+                <span class="bar bar-3" class:bar-show={strength > 2} />
+                <span class="bar bar-4" class:bar-show={strength > 3} />
+            </div>
 
-        <div class="strength">
-            <span class="bar bar-1" class:bar-show={strength > 0} />
-            <span class="bar bar-2" class:bar-show={strength > 1} />
-            <span class="bar bar-3" class:bar-show={strength > 2} />
-            <span class="bar bar-4" class:bar-show={strength > 3} />
-        </div>
-
-        <ul>
-            <li>
-                {validation[0] ? "✅" : "❗️"} must be at least 6 characters
-            </li>
-            <li>
-                {validation[1] ? "✅" : "❗️"} must contain a capital letter
-            </li>
-            <li>{validation[2] ? "✅" : "❗️"} must contain a number</li>
-            <li>
-                {validation[3] ? "✅" : "❗️"} must have a special char !@#...
-            </li>
-        </ul>
+            <ul>
+                <li>
+                    {validation[0] ? "✅" : "❗️"} must be at least 6 characters
+                </li>
+                <li>
+                    {validation[1] ? "✅" : "❗️"} must contain a capital letter
+                </li>
+                <li>{validation[2] ? "✅" : "❗️"} must contain a number</li>
+                <li>
+                    {validation[3] ? "✅" : "❗️"} must have a special char !@#...
+                </li>
+            </ul>
+        </span>
     </form>
 </main>
 
@@ -62,6 +76,7 @@
     form {
         --text-color: #afafaf;
         padding: 10px 300px;
+        color: white;
     }
     .field {
         width: 100%;
@@ -157,5 +172,13 @@
     }
     .bar-4 {
         background: linear-gradient(to right, yellow, yellowgreen);
+    }
+
+    .toggle-password {
+        color: #afafaf;
+        position: flex;
+        cursor: help;
+        font-size: 1.5rem;
+        right: 0.25rem;
     }
 </style>
