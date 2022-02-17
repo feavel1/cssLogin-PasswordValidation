@@ -1,4 +1,21 @@
 <script lang="ts">
+    import { current_component } from "svelte/internal";
+
+    let strength = 0;
+    let validation = [];
+
+    function validatePassword(event) {
+        const password = event.target.value;
+
+        validation = [
+            password.length > 5,
+            password.search(/[A-Z]/) > -1,
+            password.search(/[0-9]/) > -1,
+            password.search(/[!@#$%^&*()_+<>:;?]/) > -1,
+        ];
+
+        strength = validation.reduce((acc, cur) => acc + cur);
+    }
 </script>
 
 <main>
@@ -9,22 +26,34 @@
         </div>
 
         <div class="field">
-            <input type="password" name="email" class="input" placeholder=" " />
+            <input
+                type="password"
+                name="email"
+                class="input"
+                placeholder=" "
+                on:input={validatePassword}
+            />
             <label for="password" class="label">Password</label>
         </div>
 
         <div class="strength">
-            <span class="bar bar-1" />
-            <span class="bar bar-2" />
-            <span class="bar bar-3" />
-            <span class="bar bar-3" />
+            <span class="bar bar-1" class:bar-show={strength > 0} />
+            <span class="bar bar-2" class:bar-show={strength > 1} />
+            <span class="bar bar-3" class:bar-show={strength > 2} />
+            <span class="bar bar-4" class:bar-show={strength > 3} />
         </div>
 
         <ul>
-            <li>must be at least 6 characters</li>
-            <li>must contain a capital letter</li>
-            <li>must contain a number</li>
-            <li>must not be forgotten by u</li>
+            <li>
+                {validation[0] ? "✅" : "❗️"} must be at least 6 characters
+            </li>
+            <li>
+                {validation[1] ? "✅" : "❗️"} must contain a capital letter
+            </li>
+            <li>{validation[2] ? "✅" : "❗️"} must contain a number</li>
+            <li>
+                {validation[3] ? "✅" : "❗️"} must have a special char !@#...
+            </li>
         </ul>
     </form>
 </main>
@@ -111,5 +140,22 @@
         width: 25%;
         transition: box-shadow 500px;
         box-shadow: inset 0px 20px #1f1f1f;
+    }
+
+    .bar-show {
+        box-shadow: none;
+    }
+
+    .bar-1 {
+        background: linear-gradient(to right, red, orangered);
+    }
+    .bar-2 {
+        background: linear-gradient(to right, orangered, orange);
+    }
+    .bar-3 {
+        background: linear-gradient(to right, orange, yellow);
+    }
+    .bar-4 {
+        background: linear-gradient(to right, yellow, yellowgreen);
     }
 </style>
