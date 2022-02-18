@@ -47,7 +47,7 @@
                 on:mouseenter={() => (showPassword = true)}
                 on:mouseleave={() => (showPassword = false)}
             >
-                {showPassword ? "🐵" : "🙈"} ⬅️ Hover me to show passoword
+                {showPassword ? "🐵" : "🙈"} ⬅ Hover me to show passoword ♡♡♡
             </span>
             <div class="strength">
                 <span class="bar bar-1" class:bar-show={strength > 0} />
@@ -56,7 +56,7 @@
                 <span class="bar bar-4" class:bar-show={strength > 3} />
             </div>
 
-            <ul>
+            <ul class="hint-list">
                 <li>
                     {validation[0] ? "✅" : "❗️"} must be at least 6 characters
                 </li>
@@ -74,9 +74,15 @@
 
 <style>
     form {
-        --text-color: #afafaf;
+        /* --text-color: #afafaf;
         padding: 10px 300px;
-        color: white;
+        color: white; */
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 20px;
+        padding: 36px 10%;
     }
     .field {
         width: 100%;
@@ -178,7 +184,14 @@
         color: #afafaf;
         position: flex;
         cursor: help;
-        font-size: 1.5rem;
+        font-size: 1rem;
         right: 0.25rem;
+    }
+    .hint-list li {
+        list-style-type: none;
+        color: var(--text-color);
+    }
+    .hint-list {
+        padding: 1px;
     }
 </style>
