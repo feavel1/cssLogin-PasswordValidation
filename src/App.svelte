@@ -21,7 +21,7 @@
 
 <main>
     <form>
-        <span>
+        <span class="span-class">
             <div class="field">
                 <input
                     type="email"
@@ -74,15 +74,17 @@
 
 <style>
     form {
-        /* --text-color: #afafaf;
-        padding: 10px 300px;
-        color: white; */
+        --text-color: #afafaf;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+    .span-class {
+        margin: 50px 50px;
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 20px;
-        padding: 36px 10%;
     }
     .field {
         width: 100%;
